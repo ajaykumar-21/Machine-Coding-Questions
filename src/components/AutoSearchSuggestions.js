@@ -1,12 +1,11 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import style from "./AutoSearchSuggestions.module.css";
 
-const mockData = [
-  { id: 1, name: "Leanne Graham" },
-  { id: 2, name: "Ervin Howell" },
-  { id: 3, name: "Clementine Bauch" },
-];
+// const mockData = [
+//   { id: 1, name: "Leanne Graham" },
+//   { id: 2, name: "Ervin Howell" },
+//   { id: 3, name: "Clementine Bauch" },
+// ];
 
 // Mock Server
 const FAILURE_COUNT = 10;
@@ -47,41 +46,58 @@ function getSuggestions(text) {
 }
 
 function AutoSearchSuggestions() {
+  const inputRef = useRef();
+  const suggestionAreaRef = useRef();
   const [query, setQuery] = useState("");
   const [list, updateList] = useState([]);
   const [suggestionAreaVisibility, setSuggestionAreaVisibility] =
     useState(false);
-  //   console.log(query);
+
+  console.log(inputRef.current);
 
   const handleChange = (e) => {
-    // if (!list) {
-    //   return updateList([]);
-    // }
     const { value } = e.target;
     setQuery(value);
-    searchInput(value);
+    // searchInput(value);
     setSuggestionAreaVisibility(true);
-    // makeApiCall(value);
+    makeApiCall(value);
   };
 
-  const searchInput = (query) => {
-    const filtered = mockData
-      .map((data) => data.name)
-      .filter((val) =>
-        val.toLocaleLowerCase().includes(query.toLocaleLowerCase())
-      );
-    updateList(filtered);
-    console.log(filtered);
+  // const searchInput = (query) => {
+  //   const filtered = mockData
+  //     .map((data) => data.name)
+  //     .filter((val) =>
+  //       val.toLocaleLowerCase().includes(query.toLocaleLowerCase())
+  //     );
+  //   updateList(filtered);
+  //   console.log(filtered);
+  // };
+
+  const makeApiCall = async (query) => {
+    try {
+      const res = await getSuggestions(query);
+      updateList(res);
+    } catch (error) {
+      updateList([]);
+      console.log("Error while fatching the data", error);
+    }
   };
 
-  //   const makeApiCall = async (query) => {
-  //     try {
-  //       const res = await getSuggestions(query);
-  //       updateList(res);
-  //     } catch (error) {
-  //       console.log("Error while fatching the data", error);
-  //     }
-  //   };
+  useEffect(() => {
+    window.addEventListener("click", (e) => {
+      console.log(e.target);
+      if (
+        e.target !== inputRef.current &&
+        e.target !== suggestionAreaRef.current
+      ) {
+        setSuggestionAreaVisibility(false);
+      }
+    });
+
+    return () => {
+      window.removeEventListener("click", () => {});
+    };
+  }, []);
 
   return (
     <div className={style.container}>
@@ -91,12 +107,21 @@ function AutoSearchSuggestions() {
         type="text"
         value={query}
         onChange={handleChange}
+        onFocus={() => setSuggestionAreaVisibility(true)}
+        // onBlur={() => setSuggestionAreaVisibility(false)}
+        ref={inputRef}
       />
       {suggestionAreaVisibility && (
-        <div className={style.suggestionArea}>
+        <div className={style.suggestionArea} ref={suggestionAreaRef}>
           {list &&
-            list.map((data) => (
-              <div onClick={() => setQuery(data)}>{data}</div>
+            list.map((data, idx) => (
+              <div
+                onClick={() => setQuery(data)}
+                className={style.suggestionsList}
+                key={idx}
+              >
+                {data}
+              </div>
             ))}
         </div>
       )}

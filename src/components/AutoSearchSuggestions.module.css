@@ -29,11 +29,15 @@
 
 .suggestionArea {
   width: 600px;
-  height: 250px;
+  height: auto;
   background-color: white;
   margin-top: 10px;
   border-radius: 10px;
   text-align: left;
   padding-left: 10px;
   box-sizing: border-box;
+}
+
+.suggestionsList {
+  height: 30px;
 }
