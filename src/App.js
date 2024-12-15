@@ -1,12 +1,14 @@
 import "./App.css";
 // import AutoSearchSuggestions from "./components/AutoSearchSuggestions/AutoSearchSuggestions";
-import SwitchCaseComponent from "./components/SwitchCaseComponent/SwitchCaseComponent";
+// import SwitchCaseComponent from "./components/SwitchCaseComponent/SwitchCaseComponent";
+import InfiniteScroll from "./components/InfiniteScroll/InfiniteScroll";
 
 function App() {
   return (
     <div className="App">
       {/* <AutoSearchSuggestions /> */}
-      <SwitchCaseComponent />
+      {/* <SwitchCaseComponent /> */}
+      <InfiniteScroll />
     </div>
   );
 }
