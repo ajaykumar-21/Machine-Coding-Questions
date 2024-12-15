@@ -1,14 +1,10 @@
 import "./App.css";
-// import AutoSearchSuggestions from "./components/AutoSearchSuggestions/AutoSearchSuggestions";
-// import SwitchCaseComponent from "./components/SwitchCaseComponent/SwitchCaseComponent";
-import InfiniteScroll from "./components/InfiniteScroll/InfiniteScroll";
+import FeatureFlag from "./components/FeatureFlag/FeatureFlag";
 
 function App() {
   return (
     <div className="App">
-      {/* <AutoSearchSuggestions /> */}
-      {/* <SwitchCaseComponent /> */}
-      <InfiniteScroll />
+      <FeatureFlag />
     </div>
   );
 }
