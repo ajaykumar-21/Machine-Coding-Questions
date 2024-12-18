@@ -1,10 +1,10 @@
 import "./App.css";
-import FeatureFlag from "./components/FeatureFlag/FeatureFlag";
+import Practics from "./components/Practics/Practics";
 
 function App() {
   return (
     <div className="App">
-      <FeatureFlag />
+      <Practics />
     </div>
   );
 }
