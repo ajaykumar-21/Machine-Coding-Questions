@@ -1,75 +1,55 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { Children, useEffect, useRef, useState } from "react";
 import style from "./Practics.module.css";
 
-const mockData = [
-  { id: 1, name: "Leanne Graham" },
-  { id: 2, name: "Ervin Howell" },
-  { id: 3, name: "Clementine Bauch" },
-];
+const CustomSwitch = ({ children, value }) => {
+  let cases = [];
+  let defaults = [];
+  children.forEach((val) => {
+    if (val.type.name === "CustomCase") {
+      if (typeof val.props.value === "function") {
+        if (val.props.value(value)) {
+          cases.push(val);
+          console.log("function");
+        }
+      } else if (val.props.value === value) {
+        console.log(val.props.value);
+        cases.push(val);
+      }
+    } else if (val.type.name === "DefaultCase") {
+      defaults.push(val);
+    }
+  });
+
+  if (cases.length > 0) {
+    return cases;
+  } else {
+    return defaults;
+  }
+};
+
+const CustomCase = ({ children }) => {
+  return <div>{children}</div>;
+};
+
+const DefaultCase = ({ children }) => {
+  return <div>{children}</div>;
+};
 
 function Practics() {
-  const [query, setQuery] = useState("");
-  const [list, updatList] = useState([]);
-  const [visibilityArea, setVisibilityArea] = useState(false);
-  const inputRef = useRef();
-  const suggestionAreaRef = useRef();
-  console.log(inputRef.current, suggestionAreaRef.current);
-
-  const handleChange = (e) => {
-    const { value } = e.target;
-    setQuery(value);
-    onSearch(value);
-    setVisibilityArea(true);
-  };
-  //   console.log(query);
-
-  const onSearch = (value) => {
-    console.log(value);
-    const filtered = mockData.filter((val) =>
-      val.name.toLowerCase().includes(value.toLowerCase())
-    );
-    console.log(filtered);
-    updatList(filtered);
-  };
-
-  useEffect(() => {
-    window.addEventListener("click", (e) => {
-      if (
-        e.target !== inputRef.current &&
-        e.target !== suggestionAreaRef.current
-      ) {
-        setVisibilityArea(false);
-      }
-    });
-
-    return () => {
-      window.removeEventListener("click", () => {});
-    };
-  }, []);
-
   return (
-    <div className={`${style["Practice-Conatiner"]}`}>
-      <input
-        type="text"
-        value={query}
-        placeholder="Search"
-        onChange={handleChange}
-        onFocus={() => setVisibilityArea(true)}
-        ref={inputRef}
-        // onBlur={() => setVisibilityArea(false)}
-      />
-      {visibilityArea && (
-        <div className={`${style["Suggestion-Area"]}`} ref={suggestionAreaRef}>
-          {list.map((data, index) => {
-            return (
-              <div key={index} onClick={() => setQuery(data)}>
-                {data}
-              </div>
-            );
-          })}
-        </div>
-      )}
-    </div>
+    <>
+      <CustomSwitch value="30">
+        <CustomCase value={(e) => e < 10}>
+          <div>Hello less than 10</div>
+        </CustomCase>
+        <CustomCase value="20">Hello 20</CustomCase>
+        <CustomCase value="30">Hello 30</CustomCase>
+        <CustomCase value="10">
+          <div>Hello 10</div>
+        </CustomCase>
+        <DefaultCase>Hello 40</DefaultCase>
+      </CustomSwitch>
+    </>
   );
 }
 
