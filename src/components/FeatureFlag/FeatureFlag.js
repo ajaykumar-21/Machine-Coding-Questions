@@ -15,34 +15,34 @@ export const FeatureFlagProvider = ({ children }) => {
   );
 };
 
-const PaymentFlag = () => {
-  return (
-    <>
-      <Feature feature="isGooglePayEnabled" value={true}>
-        Google
-      </Feature>{" "}
-      <Feature feature="isPhonePayEnabled" value={true}>
-        Phone Pay
-      </Feature>
-    </>
-  );
-};
-const Feature = ({ feature, value, children }) => {
+// const PaymentFlag = () => {
+//   return (
+//     <>
+//       <Feature feature="isGooglePayEnabled" value={true}>
+//         Google
+//       </Feature>{" "}
+//       <Feature feature="isPhonePayEnabled" value={true}>
+//         Phone Pay
+//       </Feature>
+//     </>
+//   );
+// };
+const Feature = () => {
   const { features } = React.useContext(FeatureFlags);
-  return features[feature] === value ? children : null;
+  // return features[feature] === value ? children : null;
 
-  //   return (
-  //     <>
-  //       <h1>{features.isGooglePayEnabled ? "Google" : ""}</h1>
-  //       <h1>{features.isPhonePayEnabled ? "Phone Pay" : ""}</h1>
-  //     </>
-  //   );
+    return (
+      <>
+        <h1>{features.isGooglePayEnabled ? "Google" : ""}</h1>
+        <h1>{features.isPhonePayEnabled ? "Phone Pay" : ""}</h1>
+      </>
+    );
 };
 
 function FeatureFlag() {
   return (
     <FeatureFlagProvider>
-      <PaymentFlag />
+      <Feature />
     </FeatureFlagProvider>
   );
 }
