@@ -1,13 +1,12 @@
 import "./App.css";
-import Practics from "./components/Practics/Practics";
-// import StepperComponent from "./components/StepperComponent/StepperComponent";
-import List from "./components/StepperComponent/List";
+// import Practics from "./components/Practics/Practics";
+import Pagination from "./components/Pagination/Pagination";
 
 function App() {
   return (
     <div className="App">
       {/* <Practics /> */}
-      <List />
+      <Pagination />
     </div>
   );
 }
