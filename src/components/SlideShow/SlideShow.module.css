@@ -1,0 +1,92 @@
+.slideShowContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 100vh;
+}
+
+.slide {
+  position: absolute;
+  width: 500px;
+  height: auto;
+  top: 20%;
+}
+
+.slideShow {
+  width: 100%;
+  display: none;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.slideShow.active {
+  display: block;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+.slideShow img {
+  width: 100%;
+}
+
+.navigateButton {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px 0 20px;
+  box-sizing: border-box;
+}
+
+.prev {
+  font-weight: 900;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.next {
+  font-weight: 900;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.dottedNavigate {
+  background-color: gray;
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+.dottedNavigate.active {
+  background-color: aqua;
+}
+
+.dottedWrapper {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  top: 72%;
+}
+
+@media (max-width: 768px) {
+  .slideShowContainer {
+    width: 100%;
+  }
+  .slide {
+    width: 100%;
+  }
+  .dottedWrapper {
+    margin-top: 10px;
+  }
+}
