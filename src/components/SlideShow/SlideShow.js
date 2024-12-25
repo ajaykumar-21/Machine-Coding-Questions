@@ -64,17 +64,17 @@ function SlideShow() {
             {">"}
           </div>
         </div>
-      </div>
-      <div className={style.dottedWrapper}>
-        {images.map((e, i) => (
-          <div
-            key={e.caption}
-            className={`${style.dottedNavigate} ${
-              active === i ? style.active : ""
-            }`}
-            onClick={() => setActive(i)}
-          ></div>
-        ))}
+        <div className={style.dottedWrapper}>
+          {images.map((e, i) => (
+            <div
+              key={e.caption}
+              className={`${style.dottedNavigate} ${
+                active === i ? style.active : ""
+              }`}
+              onClick={() => setActive(i)}
+            ></div>
+          ))}
+        </div>
       </div>
     </div>
   );

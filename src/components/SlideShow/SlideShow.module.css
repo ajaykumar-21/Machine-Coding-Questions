@@ -1,17 +1,13 @@
 .slideShowContainer {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: relative;
-  height: 100vh;
 }
 
 .slide {
-  position: absolute;
   width: 500px;
-  height: auto;
-  top: 20%;
+  position: relative;
+  transform: translateY(50%);
 }
 
 .slideShow {
@@ -40,22 +36,22 @@
 .navigateButton {
   position: absolute;
   width: 100%;
-  top: 50%;
+  top: 45%;
   display: flex;
   justify-content: space-between;
-  padding: 0 20px 0 20px;
-  box-sizing: border-box;
 }
 
 .prev {
   font-weight: 900;
   font-size: 30px;
+  padding-left: 20px;
   cursor: pointer;
 }
 
 .next {
   font-weight: 900;
   font-size: 30px;
+  padding-right: 20px;
   cursor: pointer;
 }
 
@@ -73,20 +69,9 @@
 
 .dottedWrapper {
   position: absolute;
+  width: 100%;
   display: flex;
   justify-content: center;
+  margin-top: 10px;
   gap: 15px;
-  top: 72%;
-}
-
-@media (max-width: 768px) {
-  .slideShowContainer {
-    width: 100%;
-  }
-  .slide {
-    width: 100%;
-  }
-  .dottedWrapper {
-    margin-top: 10px;
-  }
 }
