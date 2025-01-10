@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { setUserData, getUserData } from "./GetData";
 
 function UserTable() {
   const [users, setUsers] = useState({
@@ -6,25 +7,14 @@ function UserTable() {
     lastName: "",
     phone: "",
   });
-  const [userList, setUserList] = useState([]);
+  const [userList, setUserList] = useState(getUserData);
 
-  useEffect(() => {
-    localStorage.setItem("users", JSON.stringify(userList));
-  }, [userList]);
-
-  useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("users")) || [];
-    if (data) {
-      setUserList(data);
-    }
-  }, []);
+  setUserData(userList);
 
   const handleSubmit = (e) => {
-    if (users.firstName && users.lastName && users.phone) {
-      e.preventDefault();
-      setUserList((prevList) => [...prevList, users]);
-      setUsers({ firstName: "", lastName: "", phone: "" });
-    }
+    e.preventDefault();
+    setUserList((prevList) => [...prevList, users]);
+    setUsers({ firstName: "", lastName: "", phone: "" });
     // alert("submitted successfully");
   };
 
@@ -35,7 +25,7 @@ function UserTable() {
       [name]: value,
     }));
   };
-  console.log(userList);
+  //   console.log(userList);
   return (
     <>
       <div>
@@ -49,13 +39,13 @@ function UserTable() {
           <input
             type="text"
             name="lastName"
-            placeholder="Enter your first name"
+            placeholder="Enter your last name"
             onChange={handleChange}
           />
           <input
             type="number"
             name="phone"
-            placeholder="Enter your first name"
+            placeholder="Enter your phoen number"
             onChange={handleChange}
           />
           <button type="submit">ADD</button>
