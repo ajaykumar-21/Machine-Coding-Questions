@@ -8,7 +8,10 @@ function Modal() {
       <button onClick={() => setShow(true)}>
         {show ? "hide" : "show"} modal
       </button>
-      <div className={styles.backdrop} onClick={() => setShow(false)}>
+      <div
+        className={`${styles.backdrop} ${show ? styles.backDropColor : ""}`}
+        onClick={() => setShow(false)}
+      >
         {show && (
           <div className={`${styles.wrapper} ${show ? styles.active : ""}`}>
             <div className={styles.header}>

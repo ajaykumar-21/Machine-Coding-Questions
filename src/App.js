@@ -1,12 +1,12 @@
 import "./App.css";
 // import Practics from "./components/Practics/Practics";
-import Modal from "./components/Modal/Modal";
+import UserTable from "./components/UserTable/UserTable";
 
 function App() {
   return (
     <div className="App">
       {/* <Practics /> */}
-      <Modal />
+      <UserTable />
     </div>
   );
 }
