@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { setUserData, getUserData } from "./GetData";
-
+import style from "./UserTable.module.css";
 function UserTable() {
   const [users, setUsers] = useState({
     firstName: "",
@@ -27,8 +27,8 @@ function UserTable() {
   };
   //   console.log(userList);
   return (
-    <>
-      <div>
+    <div className={style.container}>
+      <div className={style.formField}>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
@@ -48,10 +48,12 @@ function UserTable() {
             placeholder="Enter your phoen number"
             onChange={handleChange}
           />
-          <button type="submit">ADD</button>
+          <div>
+            <button type="submit">ADD</button>
+          </div>
         </form>
       </div>
-      <div>
+      <div className={style.wrapper}>
         <table>
           <thead>
             <tr>
@@ -72,7 +74,7 @@ function UserTable() {
           </tbody>
         </table>
       </div>
-    </>
+    </div>
   );
 }
 

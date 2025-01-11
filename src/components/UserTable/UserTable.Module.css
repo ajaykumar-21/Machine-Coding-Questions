@@ -1,0 +1,62 @@
+input {
+  height: 10px;
+  width: 200px;
+  padding: 10px;
+  border-radius: 3px;
+  margin-left: 10px;
+}
+
+form {
+  margin: 10px;
+}
+
+button {
+  width: 100px;
+  height: 10px;
+  padding: 15px;
+  text-align: center;
+  margin-left: 10px;
+  margin-top: 20px;
+  line-height: 5px;
+  font-size: large;
+}
+
+.formField {
+  transform: translateY(-300%);
+  width: 80%;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper {
+  transform: translateY(-350%);
+  width: 80%;
+  display: flex;
+  justify-content: center;
+}
+
+/* table {
+  border: 1px solid black;
+} */
+
+thead {
+  padding: 10px;
+  background-color: aqua;
+}
+
+th {
+  width: 250px;
+  padding: 10px;
+}
+
+tbody tr:nth-child(even) {
+  background-color: antiquewhite;
+}
