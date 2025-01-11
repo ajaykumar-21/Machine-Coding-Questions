@@ -37,22 +37,20 @@ button {
 }
 
 .wrapper {
-  transform: translateY(-350%);
+  position: absolute;
+  top: 230px;
   width: 80%;
   display: flex;
   justify-content: center;
 }
-
-/* table {
-  border: 1px solid black;
-} */
 
 thead {
   padding: 10px;
   background-color: aqua;
 }
 
-th {
+th,
+td {
   width: 250px;
   padding: 10px;
 }
