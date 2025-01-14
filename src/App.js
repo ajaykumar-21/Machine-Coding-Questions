@@ -1,12 +1,12 @@
 import "./App.css";
 // import Practics from "./components/Practics/Practics";
-import UserTable from "./components/UserTable/UserTable";
+import TrafficLight from "./components/TrafficLight/TrafficLight";
 
 function App() {
   return (
     <div className="App">
       {/* <Practics /> */}
-      <UserTable />
+      <TrafficLight />
     </div>
   );
 }
