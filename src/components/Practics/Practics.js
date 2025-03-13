@@ -1,68 +1,55 @@
 import React, { useEffect, useRef, useState } from "react";
 import style from "./Practics.module.css";
 
-const mockData = [
-  { id: 1, name: "Leanne Graham" },
-  { id: 2, name: "Ervin Howell" },
-  { id: 3, name: "Clementine Bauch" },
-];
+const CustomSwitch = (val) => {
+  const { value, children } = val;
 
-function Practics() {
-  const inputRef = useRef(null);
-  const suggestionRef = useRef(null);
-  const [query, setQery] = useState("");
-  const [list, setlist] = useState([]);
-  const [suggestionAreaVisibility, setSuggestionAreaVisibility] =
-    useState(false);
+  const cases = [];
+  const defaults = [];
 
-  useEffect(() => {
-    if (query.length > 0) {
-      setSuggestionAreaVisibility(true);
-      const nameData = mockData.map((e) => e.name);
-      const filtered = nameData.filter((data) =>
-        data.toLowerCase().includes(query.toLowerCase())
-      );
-      setlist(filtered);
-    } else {
-      setlist([]);
-    }
-  }, [query]);
-
-  useEffect(() => {
-    window.addEventListener("click", (e) => {
-      console.log(e.target, inputRef.current, suggestionRef.current);
-      if (e.target !== inputRef.current && e.target !== suggestionRef.current) {
-        setSuggestionAreaVisibility(false);
+  children.forEach((e) => {
+    if (e.type.name === "CustomCase") {
+      if (typeof e.props.value === "function") {
+        if (e.props.value(value)) {
+          cases.push(e);
+        }
+      } else if (e.props.value === value) {
+        cases.push(e);
       }
-    });
-
-    return () => {
-      window.removeEventListener("click", () => {});
-    };
+    } else if (e.type.name === "DefaultCase") {
+      defaults.push(e);
+    }
   });
 
+  if (cases.length > 0) {
+    return cases;
+  } else {
+    return defaults;
+  }
+};
+
+const CustomCase = (val) => {
+  return <h1>{val.children}</h1>;
+};
+
+const DefaultCase = (val) => {
+  return <h1>{val.children}</h1>;
+};
+function Practics() {
   return (
-    <div className={style.container}>
-      <div>
-        <h2>Auto Search Suggestions</h2>
-        <input
-          type="text"
-          value={query}
-          onChange={(e) => setQery(e.target.value)}
-          ref={inputRef}
-        />
-        {suggestionAreaVisibility && (
-          <div className={style.suggestonArea} ref={suggestionRef}>
-            {list &&
-              list.map((e, i) => (
-                <div key={i} onClick={() => setQery(e)}>
-                  {e}
-                </div>
-              ))}
-          </div>
-        )}
-      </div>
-    </div>
+    <>
+      <CustomSwitch value="10">
+        <CustomCase value={(e) => e < 10}>
+          <div>Hello less than 10</div>
+        </CustomCase>
+        <CustomCase value="20">Hello 20</CustomCase>
+        <CustomCase value="30">Hello 30</CustomCase>
+        <CustomCase value="10">
+          <div>Hello 10</div>
+        </CustomCase>
+        <DefaultCase>Hello 40</DefaultCase>
+      </CustomSwitch>
+    </>
   );
 }
 
