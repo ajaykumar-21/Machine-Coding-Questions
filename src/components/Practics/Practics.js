@@ -1,54 +1,52 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { act, useEffect, useRef, useState } from "react";
 import style from "./Practics.module.css";
 
-const CustomSwitch = (val) => {
-  const { value, children } = val;
-
-  const cases = [];
-  const defaults = [];
-
-  children.forEach((e) => {
-    if (e.type.name === "CustomCase") {
-      if (typeof e.props.value === "function") {
-        if (e.props.value(value)) {
-          cases.push(e);
-        }
-      } else if (e.props.value === value) {
-        cases.push(e);
-      }
-    } else if (e.type.name === "DefaultCase") {
-      defaults.push(e);
-    }
-  });
-
-  if (cases.length > 0) {
-    return cases;
-  } else {
-    return defaults;
-  }
-};
-
-const CustomCase = (val) => {
-  return <h1>{val.children}</h1>;
-};
-
-const DefaultCase = (val) => {
-  return <h1>{val.children}</h1>;
+const light = {
+  red: "red",
+  yellow: "yellow",
+  green: "green",
 };
 function Practics() {
+  const [active, setActive] = useState(light.red);
+
+  useEffect(() => {
+    if (active === light.red) {
+      setTimeout(() => {
+        setActive(light.green);
+      }, 4000);
+    } else if (active === light.green) {
+      setTimeout(() => {
+        setActive(light.yellow);
+      }, 5000);
+    } else {
+      setTimeout(() => {
+        setActive(light.red);
+      }, 3000);
+    }
+  }, [active]);
+
   return (
     <>
-      <CustomSwitch value="10">
-        <CustomCase value={(e) => e < 10}>
-          <div>Hello less than 10</div>
-        </CustomCase>
-        <CustomCase value="20">Hello 20</CustomCase>
-        <CustomCase value="30">Hello 30</CustomCase>
-        <CustomCase value="10">
-          <div>Hello 10</div>
-        </CustomCase>
-        <DefaultCase>Hello 40</DefaultCase>
-      </CustomSwitch>
+      <div class className={style.wrapper}>
+        <div
+          className={`${style.red} ${style.traffic}`}
+          style={active !== "red" ? { opacity: 0.5 } : null}
+        >
+          A
+        </div>
+        <div
+          className={`${style.green} ${style.traffic}`}
+          style={active !== "green" ? { opacity: 0.5 } : null}
+        >
+          B
+        </div>
+        <div
+          className={`${style.yellow} ${style.traffic}`}
+          style={active !== "yellow" ? { opacity: 0.5 } : null}
+        >
+          C
+        </div>
+      </div>
     </>
   );
 }
