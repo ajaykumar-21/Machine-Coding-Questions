@@ -2,30 +2,30 @@ import React, { useEffect, useRef, useState } from "react";
 import style from "./Practics.module.css";
 
 const Practics = () => {
-  const [count, setCount] = useState(50);
+  const [show, setShow] = useState(false);
 
-  useEffect(() => {
-    const onScroll = () => {
-      if (
-        Math.ceil(window.innerHeight + window.scrollY) >=
-        document.body.offsetHeight - 10
-      ) {
-        setCount(count + 50);
-      }
-    };
-
-    window.addEventListener("scroll", onScroll);
-
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-    };
-  }, [count]);
-
-  const elements = [];
-  for (let i = 0; i <= count; i++) {
-    elements.push(<div key={i}>{i}</div>);
-  }
-  return elements;
+  return (
+    <div
+      className={`${style.modalContainer} ${
+        show ? style.backgroundColor : ""
+      }`}
+    >
+      <button onClick={() => setShow(true)}>
+        {show ? "Hide" : "Show"} Modal
+      </button>
+      {show && (
+        <div className={`${style.container} ${show ? style.active : ""}`}>
+          <div className={style.wrapper}>
+            <div>Modal</div>
+            <div className={style.close} onClick={() => setShow(false)}>
+              X
+            </div>
+          </div>
+          <div className={style.component}>Modal Component</div>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default Practics;

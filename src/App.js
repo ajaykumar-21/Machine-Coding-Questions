@@ -1,6 +1,6 @@
 import "./App.css";
 import Practics from "./components/Practics/Practics";
-// import TrafficLight from "./components/TrafficLight/TrafficLight";
+// import Modal from "./components/Modal/Modal";
 
 function App() {
   return (
