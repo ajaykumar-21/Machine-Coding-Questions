@@ -1,17 +1,26 @@
 import React, { useEffect, useRef, useState } from "react";
 import style from "./Practics.module.css";
 
+const getData = () => {
+  return JSON.parse(localStorage.getItem("users"));
+};
+
+const setData = (userList) => {
+  localStorage.setItem("users", JSON.stringify(userList));
+};
 const Practics = () => {
   const [user, setUser] = useState({
     name: "",
     gender: "",
     mobile: "",
   });
-  const [userList, setUserList] = useState([]);
+  const [userList, setUserList] = useState(getData);
+  setData(userList);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setUserList((prevList) => [...prevList, user]);
+    setUser({ name: "", gender: "", mobile: "" });
   };
 
   const handleChange = (e) => {
