@@ -3,15 +3,40 @@ import style from "./Practics.module.css";
 
 const List = ({ data }) => {
   console.log(data);
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState(2);
+
+  const progressLineWidth = (100 / (data.length - 1)) * currentStep;
+
+  const handlePrev = () => {
+    setCurrentStep(currentStep !== 0 ? currentStep - 1 : "");
+  };
+
+  const handleNext = () => {
+    setCurrentStep(currentStep !== data.length - 1 ? currentStep + 1 : "");
+  };
+
   return (
     <div className={style.stepperContainer}>
       <h1>Stepper components</h1>
       <div className={style.stepperWrapper}>
-        {data &&
-          data.map((e, i) => <div className={style.circle}>{i + 1}</div>)}
+        <div className={style.circleWrapper}>
+          {data &&
+            data.map((e, i) => <div className={style.circle}>{i + 1}</div>)}
+        </div>
+        <div
+          className={style.progressLine}
+          style={{ width: `${progressLineWidth}%` }}
+        ></div>
       </div>
       <div className={style.stepComponent}>{data[currentStep]}</div>
+      <div className={style.btnWrapper}>
+        <button onClick={handlePrev} disabled={currentStep === 0}>
+          Prev
+        </button>
+        <button onClick={handleNext} disabled={currentStep === data.length - 1}>
+          Next
+        </button>
+      </div>
     </div>
   );
 };

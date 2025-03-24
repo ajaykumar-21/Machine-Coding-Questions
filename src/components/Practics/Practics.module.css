@@ -10,6 +10,9 @@
 .stepperWrapper {
   width: 100%;
   height: auto;
+}
+
+.circleWrapper {
   display: flex;
   justify-content: space-between;
 }
@@ -18,14 +21,26 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: aqua;
+  background-color: rgb(171, 228, 228);
   line-height: 2.5;
   margin-top: 30px;
 }
 
 .stepComponent {
   width: auto;
-  height: auto;
+  height: 100px;
+  line-height: 7;
+}
+
+.progressLine {
+  /* width: 100%; */
+  height: 2px;
+  background-color: gray;
   position: relative;
-  top: 15%;
+  top: -27%;
+  z-index: -1;
+}
+
+button {
+  margin: 10px;
 }
