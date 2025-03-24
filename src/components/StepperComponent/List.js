@@ -3,6 +3,7 @@ import StepperComponent from "./StepperComponent";
 
 function List() {
   let data = [<Example1 />, <Example2 />, <Example3 />];
+  console.log(data.length);
   return (
     <>
       <StepperComponent data={data} />

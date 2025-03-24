@@ -1,26 +1,31 @@
-button {
-  border: none;
-  height: 30px;
-  width: 80px;
-  border-radius: 5px;
-  margin: 5px;
-  background-color: gray;
+.stepperContainer {
+  width: 500px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translate(50%, 50%);
 }
 
-table {
-  border-collapse: collapse;
+.stepperWrapper {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
 }
 
-thead {
+.circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   background-color: aqua;
-  padding: 20px;
+  line-height: 2.5;
+  margin-top: 30px;
 }
 
-td,
-th {
-  padding: 10px;
-}
-
-tbody tr:nth-child(even) {
-  background-color: gray;
+.stepComponent {
+  width: auto;
+  height: auto;
+  position: relative;
+  top: 15%;
 }

@@ -1,82 +1,36 @@
 import React, { useEffect, useRef, useState } from "react";
 import style from "./Practics.module.css";
 
-const getData = () => {
-  return JSON.parse(localStorage.getItem("users"));
-};
-
-const setData = (userList) => {
-  localStorage.setItem("users", JSON.stringify(userList));
-};
-const Practics = () => {
-  const [user, setUser] = useState({
-    name: "",
-    gender: "",
-    mobile: "",
-  });
-  const [userList, setUserList] = useState(getData);
-  setData(userList);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setUserList((prevList) => [...prevList, user]);
-    setUser({ name: "", gender: "", mobile: "" });
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUser((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-  console.log(userList);
+const List = ({ data }) => {
+  console.log(data);
+  const [currentStep, setCurrentStep] = useState(0);
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          onChange={handleChange}
-          placeholder="Enter your full name"
-        />{" "}
-        <input
-          type="text"
-          name="gender"
-          onChange={handleChange}
-          placeholder="Enter your Gender"
-        />{" "}
-        <input
-          type="number"
-          name="mobile"
-          onChange={handleChange}
-          placeholder="Enter your mobile number"
-        />
-        <button type="submit">submit</button>
-      </form>
-      <div>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Gender</th>
-              <th>Mobile</th>
-            </tr>
-          </thead>
-          <tbody>
-            {userList &&
-              userList.map((user) => (
-                <tr key={user.name}>
-                  <td>{user.name}</td>
-                  <td>{user.gender}</td>
-                  <td>{user.mobile}</td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
+    <div className={style.stepperContainer}>
+      <h1>Stepper components</h1>
+      <div className={style.stepperWrapper}>
+        {data &&
+          data.map((e, i) => <div className={style.circle}>{i + 1}</div>)}
       </div>
-    </>
+      <div className={style.stepComponent}>{data[currentStep]}</div>
+    </div>
   );
+};
+
+const Example1 = () => {
+  return <>Hello, 1</>;
+};
+
+const Example2 = () => {
+  return <>Hello, 2</>;
+};
+
+const Example3 = () => {
+  return <>Hello, 3</>;
+};
+
+const Practics = () => {
+  const data = [<Example1 />, <Example2 />, <Example3 />];
+  return <List data={data} />;
 };
 
 export default Practics;

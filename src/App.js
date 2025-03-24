@@ -1,12 +1,12 @@
 import "./App.css";
 import Practics from "./components/Practics/Practics";
-// import Modal from "./components/Modal/Modal";
+// import List from "./components/StepperComponent/List";
 
 function App() {
   return (
     <div className="App">
       <Practics />
-      {/* <TrafficLight /> */}
+      {/* <List /> */}
     </div>
   );
 }
