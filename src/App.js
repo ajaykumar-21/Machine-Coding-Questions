@@ -1,12 +1,12 @@
 import "./App.css";
 import Practics from "./components/Practics/Practics";
-// import List from "./components/StepperComponent/List";
+import FileExplorer from "./components/FileExplorer/FileExplorer";
 
 function App() {
   return (
     <div className="App">
-      <Practics />
-      {/* <List /> */}
+      {/* <Practics /> */}
+      <FileExplorer />
     </div>
   );
 }
