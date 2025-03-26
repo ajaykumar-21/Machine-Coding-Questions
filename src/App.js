@@ -1,12 +1,12 @@
 import "./App.css";
-import Practics from "./components/Practics/Practics";
-import FileExplorer from "./components/FileExplorer/FileExplorer";
+// import Practics from "./components/Practics/Practics";
+import PogressBar from "./components/ProgressBar/PogressBar";
 
 function App() {
   return (
     <div className="App">
       {/* <Practics /> */}
-      <FileExplorer />
+      <PogressBar />
     </div>
   );
 }
