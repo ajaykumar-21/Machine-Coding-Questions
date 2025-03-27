@@ -12,7 +12,9 @@ function Home({ percent }) {
     <div className={styles.wrapper}>
       <div>Pogress Bar</div>
       <div className={styles.progress}>
-        <span>{value.toFixed()}%</span>
+        <span style={{ color: `${value < 49 ? "black" : "white"}` }}>
+          {value.toFixed()}%
+        </span>
         <div style={{ width: `${value}%` }} />
       </div>
       <h5 style={{ marginTop: "5px" }}>
