@@ -1,12 +1,12 @@
 import "./App.css";
 // import Practics from "./components/Practics/Practics";
-import PogressBar from "./components/ProgressBar/PogressBar";
+import Password from "./components/Passsword/Password";
 
 function App() {
   return (
     <div className="App">
       {/* <Practics /> */}
-      <PogressBar />
+      <Password />
     </div>
   );
 }
