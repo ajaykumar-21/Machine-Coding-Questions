@@ -1,0 +1,17 @@
+@keyframes shake {
+  from {
+    right: 20px;
+  }
+  to {
+    left: 20px;
+  }
+}
+
+.likeIcon {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  animation: shake 2s;
+  position: relative;
+  /* animation-duration: 0.25s; */
+}
