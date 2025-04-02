@@ -13,3 +13,30 @@
   color: white;
   padding-right: 10px;
 }
+
+.page {
+  height: 95.5vh;
+  /* background-color: whitesmoke; */
+}
+
+/* [data-theme="light"] {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --heading-color: #444444;
+} */
+
+/* Dark mode styles */
+/* [data-theme="dark"] {
+  --bg-color: #333333;
+  --text-color: #ffffff;
+  --heading-color: #dddddd;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+h1 {
+  color: var(--heading-color);
+} */
