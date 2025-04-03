@@ -9,8 +9,8 @@
 }
 
 .userSearchInput input {
-  height: 30px;
-  width: 300px;
+  height: 35px;
+  width: 350px;
   border-radius: 10px;
   border: 1px solid rgb(223, 219, 219);
   outline: none;
@@ -21,9 +21,14 @@
 }
 
 .suggestion {
-  width: 100%;
+  width: 700px;
+  height: 150px;
   display: flex;
   flex-wrap: wrap;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: relative;
+  top: 80px;
 }
 
 .suggestion ul {
@@ -41,8 +46,27 @@
   align-items: center;
 }
 
-.suggestion ul li span {
-  /* padding-left: 5px; */
+.selectedUserArea {
+  width: 700px;
+  position: relative;
+  top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.selectedUser {
+  /* width: 100%; */
+  background-color: wheat;
+  padding: 10px;
+  border-radius: 10px;
+  font-family: sans-serif;
+}
+
+.selectedUser span {
   position: relative;
   left: 5%;
+  font-size: 13px;
+  cursor: pointer;
 }
