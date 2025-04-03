@@ -1,12 +1,12 @@
 import "./App.css";
 // import Practics from "./components/Practics/Practics";
-import SwitchTheme from "./components/SwitchTheme/SwitchTheme";
+import MultiSelectInput from "./components/MultiSelectInput/MultiSelectInput";
 
 function App() {
   return (
     <div className="App">
       {/* <Practics /> */}
-      <SwitchTheme />
+      <MultiSelectInput />
     </div>
   );
 }
