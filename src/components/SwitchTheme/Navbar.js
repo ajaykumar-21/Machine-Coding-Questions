@@ -6,11 +6,11 @@ import { useTheme } from "./ThemeContext";
 function Navbar() {
   const { theme, toggleTheme } = useTheme();
   return (
-    <div className={`${styles.wrapper} ${theme}`}>
+    <nav className={`${styles.wrapper} ${theme}`}>
       <Link to="/">Home</Link>
       <Link to="/about">About</Link>
       <Link to="/dashboard">Dashboard</Link>
-    </div>
+    </nav>
   );
 }
 
