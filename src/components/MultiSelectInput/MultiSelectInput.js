@@ -26,9 +26,14 @@ function MultiSelectInput() {
   const addUser = (user) => {
     setSelectedUser([...selectedUser, user]);
     setVisibility(false);
+    setSearchUser("");
     setSuggestions([]);
   };
   console.log(selectedUser);
+  const removeUser = (id) => {
+    const filteredUser = selectedUser.filter((user) => user.id !== id);
+    setSelectedUser(filteredUser);
+  };
 
   return (
     <div>
@@ -44,7 +49,11 @@ function MultiSelectInput() {
         <div className={styles.selectedUserArea}>
           {selectedUser &&
             selectedUser.map((user) => (
-              <div className={styles.selectedUser}>
+              <div
+                className={styles.selectedUser}
+                onClick={() => removeUser(user.id)}
+                key={user.email}
+              >
                 {user.firstName} <span>{"❌"}</span>
               </div>
             ))}
