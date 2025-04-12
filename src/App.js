@@ -1,12 +1,12 @@
 import "./App.css";
 // import Practics from "./components/Practics/Practics";
-import SwitchTheme from "./components/SwitchTheme/SwitchTheme";
+// import Practics from "./components/Practics/Practics";
+import TicTacToe from "./components/Tic-Tac-Toe/Tic-Tac-Toe";
 
 function App() {
   return (
     <div className="App">
-      {/* <Practics /> */}
-      <SwitchTheme />
+      <TicTacToe />
     </div>
   );
 }
