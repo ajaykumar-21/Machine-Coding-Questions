@@ -1,12 +1,11 @@
 import "./App.css";
 // import Practics from "./components/Practics/Practics";
-// import Practics from "./components/Practics/Practics";
-import StarRating from "./components/StarRating/StarRating";
+import Otp from "./components/Otp/Otp";
 
 function App() {
   return (
     <div className="App">
-      <StarRating />
+      <Otp />
     </div>
   );
 }
