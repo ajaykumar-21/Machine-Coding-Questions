@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./Otp.module.css";
 
 const boxes = Array(6).fill("");
@@ -40,15 +40,34 @@ function Otp() {
       return;
     }
 
-    if (index + 1 < inputField.length) {
-      ref.current[index + 1].focus();
-    }
-    copyValue[index] = key;
-    setInputField(copyValue);
+    // copyValue[index] = key;
+    // setInputField(copyValue);
+
+    // if (index + 1 < inputField.length) {
+    //   ref.current[index + 1].focus();
+    // }
   };
+
+  const onHandleChange = (e, index) => {
+    const value = e.target.value;
+    if (!isNaN(value) && value.trim() !== "") {
+      const copyValue = [...inputField];
+      copyValue[index] = value.slice(-1); // to keep last value
+      setInputField(copyValue);
+
+      if (index + 1 < inputField.length) {
+        ref.current[index + 1].focus();
+      }
+    }
+  };
+
+  useEffect(() => {
+    ref.current[0].focus();
+  }, []);
 
   return (
     <div className={styles.container}>
+      <h2>OTP</h2>
       {inputField &&
         inputField.map((value, index) => (
           <input
@@ -56,7 +75,7 @@ function Otp() {
             className={styles.otpBox}
             type="text"
             value={value}
-            //   onChange={(e) => onHandleChange(e)}
+            onChange={(e) => onHandleChange(e, index)}
             onKeyDown={(e) => handleKeyDown(e, index)}
             ref={(currentInput) => (ref.current[index] = currentInput)}
           />
