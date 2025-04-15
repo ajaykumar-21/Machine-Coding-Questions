@@ -39,13 +39,6 @@ function Otp() {
     if (isNaN(key)) {
       return;
     }
-
-    // copyValue[index] = key;
-    // setInputField(copyValue);
-
-    // if (index + 1 < inputField.length) {
-    //   ref.current[index + 1].focus();
-    // }
   };
 
   const onHandleChange = (e, index) => {
