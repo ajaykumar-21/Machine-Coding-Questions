@@ -1,0 +1,18 @@
+[
+  {
+    "button": "Profile",
+    "content": "Paris"
+  },
+  {
+    "button": "Dashboard",
+    "content": "Jupiter"
+  },
+  {
+    "button": "Settings",
+    "content": "William Shakespeare"
+  },
+  {
+    "button": "Invoice",
+    "content": "100"
+  }
+]

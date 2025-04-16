@@ -1,11 +1,11 @@
 import "./App.css";
 // import Practics from "./components/Practics/Practics";
-import Accordion from "./components/Accordion/Accordion";
+import Tab from "./components/Tab/Tab";
 
 function App() {
   return (
     <div className="App">
-      <Accordion />
+      <Tab />
     </div>
   );
 }
