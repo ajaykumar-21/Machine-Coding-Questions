@@ -1,11 +1,11 @@
 import "./App.css";
 // import Practics from "./components/Practics/Practics";
-import Tab from "./components/Tab/Tab";
+import MemoryGame from "./components/MemoryGame/MemoryGame";
 
 function App() {
   return (
     <div className="App">
-      <Tab />
+      <MemoryGame />
     </div>
   );
 }
