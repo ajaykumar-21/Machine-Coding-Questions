@@ -3,11 +3,20 @@ import styles from "./MemoryGame.module.css";
 
 function MemoryGame() {
   const [cards, setCards] = useState(generateGrid());
-  console.log(cards);
+
+  const handleClick = (id) => {
+    const copy = [...cards];
+    copy[id].isFlipped = true;
+    setCards(copy);
+  };
   return (
     <div className={styles.gridContainer}>
       {cards.map(({ id, number, isFlipped }) => (
-        <button key={id} className={styles.cards}>
+        <button
+          key={id}
+          className={styles.cards}
+          onClick={() => handleClick(id)}
+        >
           {isFlipped ? number : "?"}
         </button>
       ))}
