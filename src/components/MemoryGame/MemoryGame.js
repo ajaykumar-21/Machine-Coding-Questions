@@ -6,7 +6,7 @@ function MemoryGame() {
 
   const handleClick = (id) => {
     const copy = [...cards];
-    copy[id].isFlipped = true;
+    copy[id].isFlipped = !copy[id].isFlipped;
     setCards(copy);
   };
   return (
