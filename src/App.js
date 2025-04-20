@@ -1,11 +1,11 @@
 import "./App.css";
 // import Practics from "./components/Practics/Practics";
-import MemoryGame from "./components/MemoryGame/MemoryGame";
+import DragAndDrop from "./components/DragAndDrop/DragAndDrop";
 
 function App() {
   return (
     <div className="App">
-      <MemoryGame />
+      <DragAndDrop />
     </div>
   );
 }

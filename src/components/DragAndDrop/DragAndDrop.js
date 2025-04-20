@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import styles from "./DragAndDrop.module.css";
 
 const initialData = {
   Todo: [
@@ -20,7 +21,24 @@ const initialData = {
 };
 
 function DragAndDrop() {
-  return <div>DragAndDrop</div>;
+  const [data, setData] = useState(initialData);
+
+  return (
+    <div className={styles.todoContainer}>
+      {Object.keys(data).map((key, index) => (
+        <div key={index} className={styles.keyWrapper}>
+          {key}
+          {/* <div className={styles.itemsWrapper}> */}
+            {data[key].map((items, index) => (
+              <div key={index} className={styles.itemsList}>
+                {items}
+              </div>
+            ))}
+          {/* </div> */}
+        </div>
+      ))}
+    </div>
+  );
 }
 
 export default DragAndDrop;

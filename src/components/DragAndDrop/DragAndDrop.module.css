@@ -1,0 +1,23 @@
+.todoContainer {
+  display: flex;
+  margin-top: 40px;
+  height: auto;
+}
+
+.keyWrapper {
+  margin: 20px;
+  background-color: gray;
+  padding: 10px;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.itemsList {
+  background-color: whitesmoke;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  margin-top: 10px;
+}
