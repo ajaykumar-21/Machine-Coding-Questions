@@ -24,12 +24,12 @@ function DragAndDrop() {
   const [data, setData] = useState(initialData);
   const dragItem = useRef();
   const dragKey = useRef();
-  console.log(dragItem, dragKey);
+  console.log(data);
 
   const handleDragStart = (e, item, key) => {
     dragItem.current = item;
     dragKey.current = key;
-    dragKey.current = e.target.style.opacity = ".5";
+    e.target.style.opacity = ".5";
   };
 
   const handleDragEnd = (e) => {
@@ -37,7 +37,18 @@ function DragAndDrop() {
   };
 
   const handleDrop = (e, key) => {
-    
+    const item = dragItem.current;
+    const keys = dragKey.current;
+    console.log(item, keys, key);
+    const newData = { ...data };
+    newData[keys] = newData[keys].filter((value) => value !== item);
+    newData[key] = [...newData[key], item];
+    setData(newData);
+  };
+
+  const handleDragOver = (e) => {
+    // bydefault container or html which is not allowing to drop on them
+    e.preventDefault();
   };
 
   return (
@@ -47,6 +58,7 @@ function DragAndDrop() {
           key={index}
           className={styles.keyWrapper}
           onDrop={(e) => handleDrop(e, key)}
+          onDragOver={handleDragOver}
         >
           {key}
           {data[key].map((item, index) => (
