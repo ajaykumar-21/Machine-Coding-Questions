@@ -23,18 +23,25 @@ const initialData = {
 function DragAndDrop() {
   const [data, setData] = useState(initialData);
 
+  const handleDrapStart = (e) => {
+    e.target.style.opacity = ".5";
+  };
+
   return (
     <div className={styles.todoContainer}>
       {Object.keys(data).map((key, index) => (
         <div key={index} className={styles.keyWrapper}>
           {key}
-          {/* <div className={styles.itemsWrapper}> */}
-            {data[key].map((items, index) => (
-              <div key={index} className={styles.itemsList}>
-                {items}
-              </div>
-            ))}
-          {/* </div> */}
+          {data[key].map((items, index) => (
+            <div
+              key={index}
+              className={styles.itemsList}
+              draggable
+              onDragStart={handleDrapStart}
+            >
+              {items}
+            </div>
+          ))}
         </div>
       ))}
     </div>
