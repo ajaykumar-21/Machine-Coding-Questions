@@ -24,7 +24,6 @@ function DragAndDrop() {
   const [data, setData] = useState(initialData);
   const dragItem = useRef();
   const dragKey = useRef();
-  console.log(data);
 
   const handleDragStart = (e, item, key) => {
     dragItem.current = item;
@@ -33,13 +32,12 @@ function DragAndDrop() {
   };
 
   const handleDragEnd = (e) => {
-    e.target.style = "1";
+    e.target.style.opacity = "1";
   };
 
   const handleDrop = (e, key) => {
     const item = dragItem.current;
     const keys = dragKey.current;
-    console.log(item, keys, key);
     const newData = { ...data };
     newData[keys] = newData[keys].filter((value) => value !== item);
     newData[key] = [...newData[key], item];
