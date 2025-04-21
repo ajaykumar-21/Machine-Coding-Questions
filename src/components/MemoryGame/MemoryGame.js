@@ -5,7 +5,7 @@ function MemoryGame() {
   const [cards, setCards] = useState(generateGrid());
   const [isLocked, setIsLocked] = useState(false);
   const [flippedCard, setflippedCard] = useState([]);
-  console.log(cards[flippedCard].number);
+  // console.log(cards[flippedCard[0]].number);
 
   const handleClick = (id) => {
     if (cards[id].isFlipped || isLocked) {
