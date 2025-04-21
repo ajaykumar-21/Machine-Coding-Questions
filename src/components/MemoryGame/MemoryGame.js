@@ -1,14 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./MemoryGame.module.css";
 
 function MemoryGame() {
   const [cards, setCards] = useState(generateGrid());
+  const [isLocked, setIsLocked] = useState(false);
+  const [flippedCard, setflippedCard] = useState([]);
+  console.log(flippedCard);
 
   const handleClick = (id) => {
+    if (cards[id].isFlipped || isLocked) {
+      return;
+    }
+
     const copy = [...cards];
     copy[id].isFlipped = !copy[id].isFlipped;
     setCards(copy);
+    setflippedCard([...flippedCard, id]);
   };
+
+  useEffect(() => {
+    if (flippedCard.length === 2) {
+      setIsLocked(true);
+    }
+  }, [flippedCard]);
+
   return (
     <div className={styles.gridContainer}>
       {cards.map(({ id, number, isFlipped }) => (
