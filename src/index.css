@@ -1,8 +1,8 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities; */
 
-body {
+/* body {
   margin: 0px;
   display: flex;
   justify-content: center;
@@ -35,7 +35,7 @@ h1 {
 nav {
   background-color: var(--nav-color);
   color: var(--text-color);
-}
+} */
 
 /* Link {
   color: var(--text-color);

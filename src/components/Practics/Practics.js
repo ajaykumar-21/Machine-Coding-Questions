@@ -1,66 +1,68 @@
 import React, { useState } from "react";
 
-const data = [
-  {
-    question: "What is the capital of France?",
-    answer: "Paris",
-  },
-  {
-    question: "What is the largest planet in our solar system?",
-    answer: "Jupiter",
-  },
-  {
-    question: "Who wrote 'Romeo and Juliet'?",
-    answer: "William Shakespeare",
-  },
-  {
-    question: "What is the boiling point of water in Celsius?",
-    answer: "100",
-  },
-  {
-    question: "Which element has the chemical symbol 'O'?",
-    answer: "Oxygen",
-  },
-  {
-    question: "How many continents are there on Earth?",
-    answer: "7",
-  },
-  {
-    question: "Who painted the Mona Lisa?",
-    answer: "Leonardo da Vinci",
-  },
-  {
-    question: "What is the fastest land animal?",
-    answer: "Cheetah",
-  },
-  {
-    question: "What is the currency of Japan?",
-    answer: "Yen",
-  },
-  {
-    question: "What gas do plants absorb from the atmosphere?",
-    answer: "Carbon dioxide",
-  },
-];
+const FAILURE_COUNT = 10;
+const LATENCY = 200;
+
+function getRandomBool(n) {
+  const threshold = 1000;
+  if (n > threshold) n = threshold;
+  return Math.floor(Math.random() * threshold) % n === 0;
+}
+
+function getSuggestions(text) {
+  var pre = "pre";
+  var post = "post";
+  var results = [];
+  if (getRandomBool(2)) {
+    results.push(pre + text);
+  }
+  if (getRandomBool(2)) {
+    results.push(text);
+  }
+  if (getRandomBool(2)) {
+    results.push(text + post);
+  }
+  if (getRandomBool(2)) {
+    results.push(pre + text + post);
+  }
+  return new Promise((resolve, reject) => {
+    const randomTimeout = Math.random() * LATENCY;
+    setTimeout(() => {
+      if (getRandomBool(FAILURE_COUNT)) {
+        reject();
+      } else {
+        resolve(results);
+      }
+    }, randomTimeout);
+  });
+}
 
 function Practics() {
-  const [show, setShow] = useState(null);
+  const [query, setQuery] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  // console.log(query);
 
-  const handleToggle = (index) => {
-    setShow(show === index ? null : index);
+  const handleChange = (e) => {
+    const { value } = e.target;
+    setQuery(value);
+    makeApiCall(value);
   };
+
+  const makeApiCall = async (text) => {
+    const data = await getSuggestions(text);
+    setSuggestions(data);
+  };
+
   return (
     <div>
-      {data &&
-        data.map((item, index) => (
-          <div key={index}>
-            {item.question}
-            <button onClick={() => handleToggle(index)}>
-              {show === index ? "-" : "+"}
-            </button>
-            <div>{show === index ? item.answer : ""}</div>
-          </div>
-        ))}
+      <h1>Auto Search Suggestions</h1>
+      <input type="text" value={query} onChange={handleChange} />
+      <div>
+        {suggestions &&
+          suggestions.map((suggestion, index) => (
+            <div key={index}>{suggestion}</div>
+          ))}
+      </div>
     </div>
   );
 }
