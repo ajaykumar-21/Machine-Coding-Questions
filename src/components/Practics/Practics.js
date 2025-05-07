@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import styles from "./Practics.module.css";
 
 const FAILURE_COUNT = 10;
 const LATENCY = 200;
@@ -40,7 +41,10 @@ function getSuggestions(text) {
 function Practics() {
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
-  // console.log(query);
+  const suggestionArea = useRef();
+  const inputRef = useRef();
+  const [visible, setVisible] = useState(false);
+  console.log(visible);
 
   const handleChange = (e) => {
     const { value } = e.target;
@@ -49,19 +53,57 @@ function Practics() {
   };
 
   const makeApiCall = async (text) => {
-    const data = await getSuggestions(text);
-    setSuggestions(data);
+    try {
+      const data = await getSuggestions(text);
+      setSuggestions(data);
+    } catch (error) {
+      setSuggestions([]);
+      console.error("Error while fetching the data", error);
+    }
   };
 
+  useEffect(() => {
+    document.addEventListener("click", (e) => {
+      if (
+        e.target !== suggestionArea.current &&
+        e.target !== inputRef.current
+      ) {
+        setVisible(false);
+      }
+    });
+
+    return () => {
+      document.removeEventListener("click", () => {});
+    };
+  }, []);
+
   return (
-    <div>
+    <div className={styles.searchContainer}>
       <h1>Auto Search Suggestions</h1>
-      <input type="text" value={query} onChange={handleChange} />
-      <div>
-        {suggestions &&
-          suggestions.map((suggestion, index) => (
-            <div key={index}>{suggestion}</div>
-          ))}
+      <div className={styles.searchWrapper}>
+        <input
+          type="text"
+          value={query}
+          onChange={handleChange}
+          className={styles.searchInput}
+          onFocus={() => setVisible(true)}
+          ref={inputRef}
+        />
+        {visible && (
+          <div ref={suggestionArea}>
+            {suggestions &&
+              suggestions.map((suggestion, index) => (
+                <div
+                  key={index}
+                  onClick={() => setQuery(suggestion)}
+                  className={styles.suggestionList}
+                  // ref={suggestionArea}
+                >
+                  {suggestion}
+                </div>
+              ))}
+          </div>
+        )}
       </div>
     </div>
   );

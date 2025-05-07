@@ -1,46 +1,27 @@
-.stepperContainer {
-  width: 500px;
-  height: 500px;
+.searchContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  transform: translate(50%, 50%);
 }
 
-.stepperWrapper {
+.searchInput {
+  padding: 10px;
+  border-radius: 8px;
   width: 100%;
-  height: auto;
 }
 
-.circleWrapper {
-  display: flex;
-  justify-content: space-between;
+/* .suggestionArea {
+  text-align: start;
+} */
+
+.searchWrapper {
+  width: 400px;
+  text-align: start;
 }
 
-.circle {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: rgb(171, 228, 228);
-  line-height: 2.5;
-  margin-top: 30px;
-}
-
-.stepComponent {
+.suggestionList {
+  padding-top: 7px;
+  padding-left: 10px;
   width: auto;
-  height: 100px;
-  line-height: 7;
-}
-
-.progressLine {
-  /* width: 100%; */
-  height: 2px;
-  background-color: gray;
-  position: relative;
-  top: -27%;
-  z-index: -1;
-}
-
-button {
-  margin: 10px;
+  cursor: pointer;
 }

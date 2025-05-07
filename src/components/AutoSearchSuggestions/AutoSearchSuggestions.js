@@ -94,6 +94,8 @@ function AutoSearchSuggestions() {
       }
     });
 
+    // cleanup function to prevent memory leaks and avoid duplicate listeners being added each time the component re-renders or unmounts.
+
     return () => {
       window.removeEventListener("click", () => {});
     };
