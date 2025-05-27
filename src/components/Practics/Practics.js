@@ -1,110 +1,78 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import styles from "./Practics.module.css";
 
-const FAILURE_COUNT = 10;
-const LATENCY = 200;
-
-function getRandomBool(n) {
-  const threshold = 1000;
-  if (n > threshold) n = threshold;
-  return Math.floor(Math.random() * threshold) % n === 0;
-}
-
-function getSuggestions(text) {
-  var pre = "pre";
-  var post = "post";
-  var results = [];
-  if (getRandomBool(2)) {
-    results.push(pre + text);
-  }
-  if (getRandomBool(2)) {
-    results.push(text);
-  }
-  if (getRandomBool(2)) {
-    results.push(text + post);
-  }
-  if (getRandomBool(2)) {
-    results.push(pre + text + post);
-  }
-  return new Promise((resolve, reject) => {
-    const randomTimeout = Math.random() * LATENCY;
-    setTimeout(() => {
-      if (getRandomBool(FAILURE_COUNT)) {
-        reject();
-      } else {
-        resolve(results);
-      }
-    }, randomTimeout);
-  });
-}
+const initialData = {
+  Todo: [
+    "Design UI Makeup",
+    "Set up project repository",
+    "Write unit test",
+    "Integrate payment gateway",
+  ],
+  "In Progress": [
+    "Develop authentication flow",
+    "Implement New features",
+    "Connecting to the main gate",
+  ],
+  Completed: [
+    "Set up CI/CD pipeline",
+    "Conduct code reviews",
+    "Deploy initial cersion to staging",
+  ],
+};
 
 function Practics() {
-  const [query, setQuery] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
-  const suggestionArea = useRef();
-  const inputRef = useRef();
-  const [visible, setVisible] = useState(false);
-  console.log(visible);
+  const [data, setData] = useState(initialData);
+  const dragValue = useRef();
+  const dragkey = useRef();
 
-  const handleChange = (e) => {
-    const { value } = e.target;
-    setQuery(value);
-    makeApiCall(value);
+  const handleOnDragStart = (e, value, key) => {
+    dragValue.current = value;
+    dragkey.current = key;
+    e.target.style.opacity = ".5";
   };
 
-  const makeApiCall = async (text) => {
-    try {
-      const data = await getSuggestions(text);
-      setSuggestions(data);
-    } catch (error) {
-      setSuggestions([]);
-      console.error("Error while fetching the data", error);
-    }
+  const handleOnDrag = (key) => {
+    const value = dragValue.current;
+    const keys = dragkey.current;
+    const newData = { ...data };
+    newData[keys] = newData[keys].filter((item) => item !== value);
+    newData[key] = [...newData[key], value];
+    setData(newData);
   };
 
-  useEffect(() => {
-    document.addEventListener("click", (e) => {
-      if (
-        e.target !== suggestionArea.current &&
-        e.target !== inputRef.current
-      ) {
-        setVisible(false);
-      }
-    });
+  const handleOnDragEnd = (e) => {
+    e.target.style.opacity = "1";
+  };
 
-    return () => {
-      document.removeEventListener("click", () => {});
-    };
-  }, []);
+  const handleOnDragOver = (e) => {
+    e.preventDefault();
+  };
 
   return (
-    <div className={styles.searchContainer}>
-      <h1>Auto Search Suggestions</h1>
-      <div className={styles.searchWrapper}>
-        <input
-          type="text"
-          value={query}
-          onChange={handleChange}
-          className={styles.searchInput}
-          onFocus={() => setVisible(true)}
-          ref={inputRef}
-        />
-        {visible && (
-          <div ref={suggestionArea}>
-            {suggestions &&
-              suggestions.map((suggestion, index) => (
-                <div
-                  key={index}
-                  onClick={() => setQuery(suggestion)}
-                  className={styles.suggestionList}
-                  // ref={suggestionArea}
-                >
-                  {suggestion}
-                </div>
-              ))}
-          </div>
-        )}
-      </div>
+    <div className={styles.taskContainer}>
+      {Object.keys(data).map((key, index) => (
+        <div
+          key={index}
+          className={styles.keyWrapper}
+          onDrop={() => handleOnDrag(key)}
+          onDragOver={handleOnDragOver}
+        >
+          {key}
+          {data &&
+            data[key].map((value, idx) => (
+              <div
+                key={idx}
+                className={styles.taskWrapper}
+                draggable="true"
+                onDragStart={(e) => handleOnDragStart(e, value, key)}
+                onDragEnd={handleOnDragEnd}
+                // onDragOver={handleOnDragOver}
+              >
+                {value}
+              </div>
+            ))}
+        </div>
+      ))}
     </div>
   );
 }
